@@ -22,7 +22,6 @@ var TitleCmd = &cobra.Command{
 	},
 	Args: cobra.MinimumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		log.Println(args[0])
 		nt.Title = args[0]
 		if args[1] == "content" || args[1] == "-c" && args[2] != ""{
 			nt.Cont = args[2]		
@@ -30,7 +29,6 @@ var TitleCmd = &cobra.Command{
 			fmt.Println("missing content argument (-c)")
 		}
 		nt.Save()
-
 	},
 }
 
@@ -42,12 +40,31 @@ var ContCmd = &cobra.Command{
 	Args: cobra.MinimumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		nt.Cont = args[0]
-		log.Println(nt.Cont)
-		if DB == nil {
-			log.Println("null")
-		}
 		nt.Save()
 		log.Println("saved!!")
+	},
+}
+
+var DeleteIDCmd = &cobra.Command{
+	Use: "idelete",
+	Aliases: []string{
+		"id",
+	},
+	Args: cobra.MinimumNArgs(1),
+	Run: func(cmd *cobra.Command, args []string) {
+		id := args[0]
+		stmt, err := DB.Prepare("delete from Notes where id=?")
+		if err != nil {
+			log.Println(err)
+			return
+		}
+		defer stmt.Close()
+		_,err = stmt.Exec(id)
+		if err != nil{
+			log.Println(err)
+			return
+		}	
+		
 	},
 }
 
