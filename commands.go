@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 
 	"github.com/spf13/cobra"
@@ -23,6 +24,12 @@ var TitleCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		log.Println(args[0])
 		nt.Title = args[0]
+		if args[1] == "content" || args[1] == "-c" && args[2] != ""{
+			nt.Cont = args[2]		
+		}else {
+			fmt.Println("missing content argument (-c)")
+		}
+		nt.Save()
 
 	},
 }
