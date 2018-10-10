@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"log"
-	"time"
 	_ "github.com/mattn/go-sqlite3"
 	
 )
@@ -61,7 +60,14 @@ func (nt Note)GetAll(){
 	}
 
 }
-func getDate() string{
-	currentTime := time.Now()
-	return currentTime.String()
+
+func DeleteAll(){
+	sqlStmt := `
+	drop table Notes;
+	`
+	_, err := DB.Exec(sqlStmt)
+	if err != nil {
+		log.Printf("%q: %s\n", err, sqlStmt)
+		return
+	}
 }

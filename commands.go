@@ -23,8 +23,9 @@ var TitleCmd = &cobra.Command{
 	Args: cobra.MinimumNArgs(3),
 	Run: func(cmd *cobra.Command, args []string) {
 		nt.Title = args[0]
-		if args[1] == "content" || args[1] == "-c" && args[2] != ""{
-			nt.Cont = args[2]		
+		if args[1] == "content" || args[1] == "c" && args[2] != ""{
+			nt.Cont = args[2]
+			fmt.Println("Saved!!!")		
 		}else {
 			fmt.Println("missing content argument (-c)")
 		}
@@ -75,5 +76,13 @@ var GetAllCmd = &cobra.Command{
 	},
 	Run: func(cmd *cobra.Command, args []string) {
 		nt.GetAll()
+	},
+}
+
+var DelteAllCmd = &cobra.Command{
+	Use: "ad",
+	Run: func(cmd *cobra.Command, args []string) {
+		DeleteAll()
+		fmt.Println("Deleted all your notes :)")
 	},
 }

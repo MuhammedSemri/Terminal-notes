@@ -25,7 +25,7 @@ func main() {
 
 func initCmd(){
 	
-	RootCmd.AddCommand(TitleCmd,ContCmd,GetAllCmd, DeleteIDCmd)
+	RootCmd.AddCommand(TitleCmd,ContCmd,GetAllCmd, DeleteIDCmd,DelteAllCmd)
 	if err := RootCmd.Execute(); err != nil {
 		fmt.Println(err)
 		os.Exit(1)
