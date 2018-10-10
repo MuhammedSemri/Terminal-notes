@@ -1,6 +1,8 @@
 package main
 
 import (
+	"path"
+	"path/filepath"
 	"database/sql"
 	"fmt"
 	_ "github.com/mattn/go-sqlite3"
@@ -35,7 +37,13 @@ func initCmd(){
 }
 
 func initDB(){
-	db, err := sql.Open("sqlite3", "./mem.db")
+	
+	ex, err := os.Executable()
+    if err != nil {
+        panic(err)
+    }
+	exPath := filepath.Dir(ex)
+	db, err := sql.Open("sqlite3", path.Join(exPath+ "mem.db"))
 	if err != nil {
 		log.Println(err)
 	}
