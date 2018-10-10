@@ -4,6 +4,7 @@ Notes CLI tool
 # to install 
 
 `go get -u github.com/MuhammedSemri/notes`
+
 `go install github.com/MuhammedSemri/notes`
 
 # How to use
